@@ -1,27 +1,54 @@
 # Day04 — Prompt Engineering & Tool Calling
 
-**Làm nhóm.** Mỗi thành viên tự nộp cùng URL repo nhóm trên VLearn. Repo bài nộp dùng tên và MSSV người đại diện theo mẫu `K4-L3-DAY04-HoVaTen-MSSV-PromptEngineeringToolCalling`; khai báo thành viên và đóng góp trong [TEAM.md](TEAM.md).
+**Làm nhóm · K4 Level 3B · IT Helpdesk Agent.** Mỗi thành viên tự nộp cùng URL repo nhóm trên VLearn. Repo bài nộp dùng tên `K4-L3-DAY04-HoVaTen-MSSV-PromptEngineeringToolCalling`; khai báo thành viên và đóng góp trong [TEAM.md](TEAM.md).
 
-## Mục tiêu
+## Bài lab này làm gì?
 
-- Cải thiện cách trợ lý Helpdesk chọn công cụ và điền thông tin đầu vào.
-- So sánh v0, v1, v2, v3 bằng kết quả chạy thật.
-- Xử lý hội thoại nhiều lượt, xác nhận hành động và dữ liệu nội bộ an toàn.
-- Làm việc nhóm có bằng chứng đóng góp rõ ràng.
+Nhóm nhận một trợ lý IT Helpdesk đã có agent loop, tool và dữ liệu công ty **giả lập**. Trợ lý cần hiểu yêu cầu như kiểm tra email/VPN, xem tình trạng một máy, tìm hướng dẫn nội bộ, hoặc tạo ticket sau khi đã được xác nhận.
 
-## Đọc trước khi làm
+Starter chạy được nhưng hành vi chưa hoàn chỉnh: có thể chọn nhầm tool, điền sai thông tin, không theo kịp hội thoại nhiều lượt hoặc vượt ranh giới an toàn. Nhóm dùng kết quả chạy thật để cải thiện hành vi đó. Đây không phải bài viết lại toàn bộ ứng dụng hay chỉ làm câu trả lời nghe tự nhiên hơn.
 
-| File | Dùng khi |
+Kết quả cần đạt là một agent có thể chọn đúng tool, gửi đúng input, hỏi lại khi thiếu thông tin, tôn trọng sửa/hủy ở lượt sau và không đưa dữ liệu nội bộ ra ngoài.
+
+## Starter đã có và nhóm cần làm
+
+| Starter đã có | Nhóm cần làm |
 |---|---|
-| [SUBMISSION.md](SUBMISSION.md) | Đặt tên repo, chuẩn bị file và nộp VLearn |
-| [RUBRIC.md](RUBRIC.md) | Biết cách chấm và bằng chứng cần có |
-| [CHECKPOINTS.md](CHECKPOINTS.md) | Theo mốc thời gian của buổi học |
-| [RULES.md](RULES.md) | Dùng AI, làm nhóm, deadline và bảo mật |
-| [TEAM.md](TEAM.md) | Ghi thành viên, phần việc và INDIVIDUAL |
+| Agent loop, CLI chat, adapter cho provider, 9 tool Helpdesk và dữ liệu giả lập | Đọc lỗi từ run v0; không thay đổi bộ case cố định để tăng điểm |
+| `starter_v0/artifacts/system_prompt.md` và `starter_v0/artifacts/tools.yaml` | Cải thiện hai artifact bằng giả thuyết và evidence |
+| Eval base 30 case, extension 10 case và adversarial 12 case | Chạy v0, v1, v2, v3 cùng điều kiện và ghi version log |
+| Mẫu `starter_v0/data/eval_group.json` để trống | Tự viết đúng 10 case: 5 một lượt và 5 nhiều lượt |
+| Mẫu report | Lưu run, transcript; làm UI chat hiện tool call/input/kết quả-lỗi/phiên bản; hoàn thiện report và TEAM |
+
+Chỉ sửa prompt hay tool declaration khi lỗi thuộc hành vi agent. Nếu implementation có lỗi thật, nhóm có thể sửa và cần ghi rõ evidence. Tool mới là phần bonus; xem [RUBRIC.md](RUBRIC.md).
+
+## Luồng làm bài
+
+1. Cài môi trường, chạy preflight và chạy **v0 khi chưa sửa**.
+2. Chọn failure rõ ràng: sai tool, sai input, thiếu thông tin, nhiều lượt, xác nhận/hủy hoặc an toàn dữ liệu.
+3. Đặt một giả thuyết, sửa một phần chính của prompt/tool declaration, rồi chạy lại thành v1, v2, v3.
+4. So sánh metric và trace cùng bộ case; ghi thay đổi, lý do và đường dẫn run vào `version_log.csv`.
+5. Viết case nhóm, chạy safety, hoàn thiện UI, transcript và report.
+
+Một run chỉ dùng làm bằng chứng khi `provider_error_cases == 0` và `measured_cases == total_cases`. Đọc cả tool result/error; routing PASS không tự chứng minh hành động đã thành công.
+
+## Repo bài nộp cần có gì?
+
+Giữ toàn bộ source trong `starter_v0/`, đồng thời commit evidence thật của nhóm:
+
+| Phần | Bằng chứng tối thiểu |
+|---|---|
+| Prompt và tool declaration | Bản cuối của `artifacts/system_prompt.md` và `artifacts/tools.yaml` khớp với tool registry |
+| Thử nghiệm v0–v3 | Run JSON, `version_log.csv`, giả thuyết và so sánh trước/sau |
+| Team eval và safety | `data/eval_group.json` đủ 5+5 case; run adversarial và phân tích ít nhất 3 case |
+| UI và transcript | Chat chạy được, cho thấy tool, input, kết quả/lỗi, version và các hội thoại yêu cầu |
+| Báo cáo và teamwork | `artifacts/REPORT.md`, [TEAM.md](TEAM.md), commit kỹ thuật và mục INDIVIDUAL của từng người |
+
+Không commit `.env`, API key, dữ liệu thật, `.venv`, cache hoặc ticket phát sinh. Tên repo, cấu trúc nộp và checklist đầy đủ nằm ở [SUBMISSION.md](SUBMISSION.md).
 
 ## Chuẩn bị và bắt đầu
 
-Cần Python 3.10+, Git/GitHub và API key của một provider hỗ trợ tool calling. Chỉ cần `TAVILY_API_KEY` nếu nhóm dùng tìm kiếm thiết bị trên web.
+Cần Python 3.10+, Git/GitHub và API key của một provider hỗ trợ tool calling. Chỉ cần `TAVILY_API_KEY` nếu nhóm dùng tìm kiếm thông tin thiết bị trên web.
 
 ```powershell
 cd starter_v0
@@ -31,7 +58,7 @@ python -m pip install -r requirements.txt
 Copy-Item .env.example .env
 ```
 
-Điền **một** key provider vào `.env`, sau đó chạy bản gốc trước khi sửa hai artifact:
+Điền **một** key provider vào `.env`, sau đó chạy bản gốc trước khi sửa artifact:
 
 ```powershell
 python scripts/preflight_provider.py --provider openrouter
@@ -40,21 +67,18 @@ python run_eval.py --provider openrouter --version v0 --suite base --eval-cases 
 
 Thay `openrouter` bằng `openai`, `anthropic` hoặc `gemini` khi dùng provider khác. Không commit `.env`.
 
-## Nhiệm vụ nhóm
+## Tài liệu cần đọc
 
-1. Đọc lỗi từ run v0.
-2. Cải thiện `starter_v0/artifacts/system_prompt.md` và `starter_v0/artifacts/tools.yaml`.
-3. Chạy v1, v2, v3 trên cùng bộ base và ghi `version_log.csv`.
-4. Tự viết đúng 10 tình huống mới trong `data/eval_group.json`: 5 một lượt, 5 nhiều lượt.
-5. Chạy bộ an toàn, lưu transcript và làm UI chat hiển thị tool call, đầu vào, kết quả/lỗi và phiên bản.
-6. Hoàn thiện `REPORT.md` và `TEAM.md` bằng run, file và commit thật.
+| File | Dùng khi |
+|---|---|
+| [SUBMISSION.md](SUBMISSION.md) | Đặt tên repo, chuẩn bị file và nộp VLearn |
+| [RUBRIC.md](RUBRIC.md) | Biết cách chấm và bằng chứng cần có |
+| [CHECKPOINTS.md](CHECKPOINTS.md) | Theo mốc thời gian của buổi học |
+| [RULES.md](RULES.md) | Dùng AI, làm nhóm, deadline và bảo mật |
+| [TEAM.md](TEAM.md) | Ghi thành viên, phần việc và INDIVIDUAL |
 
-Giữ nguyên các bộ câu có sẵn: base 30, adversarial 12 và extension 10. `eval_group.json` để trống có chủ đích để nhóm thực hiện.
+## Thời gian
 
-## Thời gian và đầu ra
+Buổi học: **17:30–21:00**. 17:30–17:40 giới thiệu, 17:40–17:50 Kahoot, 17:50–20:25 làm nhóm, 20:25–21:00 demo. Mốc kiểm tra tại lớp là 20:25; xem [CHECKPOINTS.md](CHECKPOINTS.md).
 
-Buổi học: **17:30–21:00**. 17:30–17:40 giới thiệu, 17:40–17:50 Kahoot, 17:50–20:25 làm nhóm, 20:25–21:00 demo. Mốc kiểm tra bản tại lớp là 20:25; xem [CHECKPOINTS.md](CHECKPOINTS.md).
-
-Bài hoàn thành có: prompt và khai báo công cụ cuối, v0–v3, bộ 10 tình huống nhóm, run an toàn, transcript, UI, report và TEAM/INDIVIDUAL. `provider_error_cases` phải bằng 0 và `measured_cases` phải bằng `total_cases` khi dùng một run làm bằng chứng.
-
-Không nộp API key, dữ liệu thật, `.venv`, cache hoặc ticket phát sinh. Hạn mặc định là **23:59 ngày học, Asia/Ho_Chi_Minh (UTC+07:00)**; xem [SUBMISSION.md](SUBMISSION.md) và [RULES.md](RULES.md).
+Hạn mặc định là **23:59 ngày học, Asia/Ho_Chi_Minh (UTC+07:00)**. Xem [SUBMISSION.md](SUBMISSION.md) và [RULES.md](RULES.md) để biết bản chốt và quy định nộp muộn.
