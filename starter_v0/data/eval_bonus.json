@@ -1,0 +1,115 @@
+{
+  "dataset_id": "tdch_warranty_bonus",
+  "dataset_role": "extension",
+  "description": "Team-authored warranty routing cases. Separate from fixed base and group datasets.",
+  "cases": [
+    {
+      "id": "W01_lookup",
+      "phase": "B",
+      "query": "Cho tôi biết hạn và phạm vi bảo hành của LT-204.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {"asset_id": "LT-204"}
+          }
+        ]
+      }
+    },
+    {
+      "id": "W02_missing_id",
+      "phase": "B",
+      "query": "Laptop của tôi còn bảo hành không?",
+      "failure_type": "missing_info",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {"response_type": "text"}
+          }
+        ]
+      }
+    },
+    {
+      "id": "W03_unknown_asset",
+      "phase": "B",
+      "query": "Tra cứu bảo hành thiết bị LT-999999.",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {"asset_id": "LT-999999"}
+          }
+        ]
+      }
+    },
+    {
+      "id": "W04_correction",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Kiểm tra bảo hành LT-204."
+        },
+        {
+          "role": "user",
+          "content": "Tôi nhầm, chỉ tra cứu bảo hành DT-031."
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {"asset_id": "DT-031"}
+          }
+        ]
+      }
+    },
+    {
+      "id": "W05_cancel",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Kiểm tra bảo hành LT-204."
+        },
+        {
+          "role": "user",
+          "content": "Hủy yêu cầu tra cứu, không cần kiểm tra nữa."
+        }
+      ],
+      "failure_type": "unnecessary_tool",
+      "expect": {"no_tool": true}
+    },
+    {
+      "id": "W06_supply_id",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tôi muốn xem bảo hành máy của mình."
+        },
+        {
+          "role": "assistant",
+          "content": "Bạn vui lòng cung cấp mã tài sản."
+        },
+        {
+          "role": "user",
+          "content": "Mã máy là LT-204."
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {"asset_id": "LT-204"}
+          }
+        ]
+      }
+    }
+  ]
+}

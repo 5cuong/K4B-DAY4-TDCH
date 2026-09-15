@@ -105,3 +105,23 @@ tools:
         asset_id: {type: string, default: "", description: "Mã tài sản nếu có"}
         confirmed: {type: boolean, default: false, description: "Đã được người dùng xác nhận"}
       required: [summary]
+
+  - name: check_warranty
+    description: >-
+      Kiểm tra bảo hành của một thiết bị công ty bằng dữ liệu giả lập nội bộ:
+      trạng thái còn hạn hoặc hết hạn, ngày hết hạn, số ngày còn lại,
+      phạm vi và điều kiện loại trừ nếu có.
+      Cần asset_id thực tế do người dùng cung cấp hoặc đã tra cứu nội bộ.
+      Thiếu mã thì gọi clarify với response_type=text; không tự đoán mã,
+      không dùng employee ID hoặc tên loại thiết bị.
+      Dùng tool này khi hỏi về bảo hành; không cần inspect_device nếu
+      người dùng chỉ yêu cầu thông tin bảo hành.
+      Kết quả tính tại ngày snapshot, không phải xác nhận trực tiếp từ hãng.
+      Không tự tạo yêu cầu bảo hành hoặc khẳng định sự cố chắc chắn được nhận.
+    parameters:
+      type: object
+      properties:
+        asset_id:
+          type: string
+          description: "Mã tài sản công ty đã biết; không dùng employee ID."
+      required: [asset_id]

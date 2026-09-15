@@ -1,0 +1,26 @@
+{
+  "source": "Fictional Northstar Labs warranty plans",
+  "plans": {
+    "LT-204": {
+      "coverage": [
+        "Lỗi phần cứng do nhà sản xuất",
+        "Linh kiện thay thế theo kết quả kiểm tra"
+      ],
+      "exclusions": [
+        "Rơi vỡ hoặc chất lỏng",
+        "Hao mòn thông thường"
+      ],
+      "support_channel": "Helpdesk nội bộ tiếp nhận yêu cầu bảo hành"
+    },
+    "DT-031": {
+      "coverage": [
+        "Lỗi phần cứng do nhà sản xuất"
+      ],
+      "exclusions": [
+        "Hư hỏng do sử dụng sai",
+        "Phần mềm không thuộc gói bảo hành"
+      ],
+      "support_channel": "Helpdesk nội bộ tiếp nhận yêu cầu bảo hành"
+    }
+  }
+}
