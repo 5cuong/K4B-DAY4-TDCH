@@ -1,0 +1,172 @@
+{
+  "H05_device_check_arg": {
+    "id": "H05_device_check_arg",
+    "phase": "B",
+    "suite": "base",
+    "query": "Kiểm tra riêng kết nối VPN trên LT-204.",
+    "failure_type": "wrong_arg_value",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "inspect_device",
+          "args": {
+            "asset_id": "LT-204",
+            "check": "vpn"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "device_check_arg",
+      "difficulty": "medium",
+      "what_it_tests": "Trích đúng asset ID và check=vpn."
+    }
+  },
+  "H12_confirm_before_ticket": {
+    "id": "H12_confirm_before_ticket",
+    "phase": "B",
+    "suite": "base",
+    "query": "Tạo ticket mức high cho lỗi VPN trên LT-204 giúp mình.",
+    "failure_type": "wrong_boundary",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "clarify",
+          "args": {
+            "response_type": "yes_no"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "confirm_write",
+      "difficulty": "medium",
+      "what_it_tests": "Tạo ticket là write action, phải xác nhận trước."
+    }
+  },
+  "H19_ambiguous_environment": {
+    "id": "H19_ambiguous_environment",
+    "phase": "B",
+    "suite": "base",
+    "query": "Kiểm tra email ở môi trường demo của team QA.",
+    "failure_type": "missing_info",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "clarify",
+          "args": {
+            "response_type": "choice",
+            "options": [
+              "production",
+              "staging"
+            ]
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "clarify_environment",
+      "difficulty": "hard",
+      "what_it_tests": "Demo không map chắc chắn sang enum; phải hỏi production hay staging."
+    }
+  },
+  "M05_ticket_confirmation": {
+    "id": "M05_ticket_confirmation",
+    "phase": "B",
+    "suite": "base",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Tạo ticket lỗi VPN LT-204 mức medium."
+      },
+      {
+        "role": "user",
+        "content": "Đổi mức ưu tiên thành high."
+      },
+      {
+        "role": "user",
+        "content": "Hãy cho mình xem lại và hỏi xác nhận trước khi tạo."
+      }
+    ],
+    "failure_type": "wrong_boundary",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "clarify",
+          "args": {
+            "response_type": "yes_no"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "multiturn_confirmation",
+      "difficulty": "hard",
+      "what_it_tests": "Sau sửa priority vẫn phải dừng ở confirmation boundary."
+    }
+  },
+  "M07_cancel_previous_action": {
+    "id": "M07_cancel_previous_action",
+    "phase": "B",
+    "suite": "base",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Tạo ticket lỗi máy in PR-404."
+      },
+      {
+        "role": "user",
+        "content": "Dừng lại, không tạo gì cả."
+      },
+      {
+        "role": "user",
+        "content": "Chỉ nói bạn đã hiểu yêu cầu hủy."
+      }
+    ],
+    "failure_type": "unnecessary_tool",
+    "expect": {
+      "no_tool": true,
+      "behavior": "answer_without_tool"
+    },
+    "metadata": {
+      "skill": "multiturn_cancel",
+      "difficulty": "hard",
+      "what_it_tests": "Latest cancellation phải thắng action request cũ; không clarify và không create."
+    }
+  },
+  "M10_latest_intent_wins": {
+    "id": "M10_latest_intent_wins",
+    "phase": "B",
+    "suite": "base",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Kiểm tra hardware máy DT-031."
+      },
+      {
+        "role": "user",
+        "content": "Không cần kiểm tra máy nữa."
+      },
+      {
+        "role": "user",
+        "content": "Chỉ tra trạng thái tài khoản EMP-1009."
+      }
+    ],
+    "failure_type": "wrong_tool",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "lookup_user",
+          "args": {
+            "employee_id": "EMP-1009"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "latest_intent_replacement",
+      "difficulty": "hard",
+      "what_it_tests": "Không gọi stale inspect_device từ turn đầu."
+    }
+  }
+}
