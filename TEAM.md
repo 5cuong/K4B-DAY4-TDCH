@@ -15,7 +15,7 @@
 | Họ và tên          | MSSV | GitHub | Vai trò và công việc                                                                                      | File/commit/PR                  |
 |--------------------|---|--------|-----------------------------------------------------------------------------------------------------------|---------------------------------|
 | Nguyễn Hoàng Cường |2A202602473 | 5cuong | Experiment & Prompt Lead,Cài provider; chạy v0; phân tích lỗi baseline; thực hiện v1 trên system prompt, Run v0/v1, thay đổi `system_prompt.md`, metric và version log  | `2b6fa00`, `1a4dfd9`, `405f068` |
-| Tống Trần Tiến Dũng |2A202602791 | Tiendung3tzz | Rà soát tool registry; cải thiện `tools.yaml`; thực hiện v2; xây bonus tool nếu có Tool declaration, tool implementation/smoke test, run v2 và bonus evidence  | `647663d`, `bf4806a`, `5ab5b13` |
+| Tống Trần Tiến Dũng |2A202602791 | Tiendung3tzz | Rà soát tool registry; cải thiện `tools.yaml`; thực hiện v2; xây bonus tool nếu có Tool declaration, tool implementation/smoke test, run v2 và bonus evidence  | `dfc98a4`, `ae562fd`, `647663d`, `bf4806a`, `5ab5b13` |
 | Vũ Đức Thiện |2A202602437 | vuthien3002-sys | Viết 10 group case; chạy group/adversarial; cải thiện confirmation, cancel và privacy cho v3 | `025eb0f`                       |
 | Vũ Quốc Huy |2A202602929 | VuQuocHuy89 | Tích hợp UI web, transcript demo; hoàn thiện v2/v3 prompt/tool contract và evidence eval | `4c39b81`, `3aa8b19`            |
 
