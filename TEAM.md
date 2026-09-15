@@ -21,7 +21,7 @@
 
 ## Nhận xét chung
 
-- Kết quả và bằng chứng: v3 base `30/30`, group `10/10`, adversarial `12/12`, extension `10/10`; xem các run trong `starter_v0/runs/` và `starter_v0/artifacts/REPORT.md`.
+- Kết quả và bằng chứng: v3 base `30/30`, group `10/10`, adversarial `12/12`, extension `10/10`, tool bonus check_warranty 6/6; xem các run trong `starter_v0/runs/` và `starter_v0/artifacts/REPORT.md`.
 - Thay đổi hiệu quả nhất: ràng buộc required arguments, latest-turn routing, fresh confirmation và privacy boundary.
 - Giới hạn còn lại: UI/transcript và evidence đã có; mỗi thành viên vẫn phải tự viết mục INDIVIDUAL theo quy định.
 - Cách phân công và tích hợp: Cường phụ trách v0/v1; Dũng phụ trách tool registry/bonus warranty; Thiện phụ trách group/safety cases; Huy phụ trách UI, v2/v3 và tích hợp evidence.
@@ -50,11 +50,19 @@ Sao chép mục này cho từng thành viên.
 
 ### Tống Trần Tiến Dũng — 2A202602791
 
-- Phần việc và file/commit/PR: thành viên tự điền.
-- Quyết định, khó khăn và cách xử lý: thành viên tự điền.
-- Điều đã học: thành viên tự điền.
-- AI/công cụ đã dùng và cách kiểm tra: thành viên tự điền.
-- Thời điểm đã tự nộp URL repo chung trên VLearn: thành viên tự điền.
+- Phần việc và file/commit/PR: Phụ trách Tool bonus & check input: rà soát tool registry và khai báo tham số; chạy eval v1 làm cơ sở phân tích; bổ sung test_tools_smoke.py giúp Kiểm tra các tool, khai báo tham số và cơ chế an toàn hoạt động đúng. xây dựng bonus tool check_warranty cùng dữ liệu phạm vi bảo hành giả lập cho tool bonus, tài liệu tool, đăng ký registry và declaration. Viết test_check_warranty.py Kiểm tra tool bảo hành xử lý đúng trạng thái, dữ liệu đầu vào và các trường hợp lỗi; chạy eval v2-bonus. Các commit:
+    - dfc98a4 : chạy run test v1.
+    - ae562fd : Bổ sung test_tools_smoke.py.
+    - 647663d : Tạo tool mới (bonus) test_check_warranty.py và tạo các file liên quan cho tool bonus (data, khai báo tool, đăng ký registry và declaration)
+    - bf4806a : chạy tool bonus và lưu kết quả
+    
+- Quyết định, khó khăn và cách xử lý: Dùng kết quả eval v1 để xác định lỗi chọn tool và tham số trước khi đề xuất cải tiến. Với bonus, tái sử dụng warranty_until trong inventory, bổ sung dữ liệu phạm vi bảo hành riêng để tránh trùng lặp ngày hết hạn. Tính trạng thái theo ngày snapshot giúp kết quả kiểm thử ổn định. Xử lý riêng mã sai, thiết bị không tồn tại, thiếu ngày bảo hành và lỗi dữ liệu; không suy đoán phạm vi khi chưa có thông tin. Khi PowerShell hiển thị NativeCommandError dù test báo OK, xác định nguyên nhân là unittest ghi kết quả ra stderr và điều chỉnh cách xuất log.
+
+- Điều đã học: cách tạo 1 tool mới, Phân biệt smoke test kiểm tra implementation với eval kiểm tra khả năng AI chọn tool và điền tham số. Hiểu rằng tên tool, schema và chữ ký hàm phải thống nhất; routing đúng chưa bảo đảm thực thi thành công. Việc kiểm tra ngày hết hạn, input không hợp lệ và dữ liệu thiếu giúp tool xử lý được nhiều tình huống hơn ngoài trường hợp thông thường.
+
+- AI/công cụ đã dùng và cách kiểm tra: Sử dụng Codex để hỗ trợ đọc cấu trúc repo, phân tích run, đề xuất declaration, implementation và test. Dùng Python unittest, PowerShell, OpenRouter với model openai/gpt-4o-mini và Git/GitHub để chạy kiểm tra, lưu evidence và quản lý thay đổi. Đối chiếu đề xuất với mã nguồn và kết quả thực tế; bộ test_check_warranty.py chạy đạt 10/10 test và tools check_warranty đạt 6/6 test. Kết quả eval được lưu trong run JSON để kiểm tra metric, tool call và lỗi thực thi; không dùng smoke test để suy ra điểm eval.
+
+- Thời điểm đã tự nộp URL repo chung trên VLearn: [06:04:17 16/9/2026]
 
 ### Vũ Đức Thiện — 2A202602437
 
