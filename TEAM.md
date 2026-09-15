@@ -16,6 +16,10 @@
 |--------------------|---|--------|-----------------------------------------------------------------------------------------------------------|---|
 | Nguyễn Hoàng Cường |2A202602473 | 5cuong | Experiment & Prompt Lead,Cài provider; chạy v0; phân tích lỗi baseline; thực hiện v1 trên system prompt, Run v0/v1, thay đổi `system_prompt.md`, metric và version log  | |
 | Tống Trần Tiến Dũng |2A202602791 | Tiendung3tzz | Rà soát tool registry; cải thiện `tools.yaml`; thực hiện v2; xây bonus tool nếu có Tool declaration, tool implementation/smoke test, run v2 và bonus evidence  | |
+<<<<<<< HEAD
+=======
+| Vũ Đức Thiện |2A202602437 | vuthien3002-sys | Viết 10 group case; chạy group/adversarial; cải thiện confirmation, cancel và privacy cho v3 | |
+>>>>>>> 42cb3f8 ( update TEAM.md)
 
 ## Nhận xét chung
 
