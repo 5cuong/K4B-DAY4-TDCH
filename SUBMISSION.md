@@ -24,8 +24,8 @@ git push -u origin main
 
 - `README.md`, `TEAM.md` và `starter_v0/artifacts/REPORT.md`.
 - Prompt, `tools.yaml`, `version_log.csv`, run base v0–v3, run group và adversarial.
-- Giữ nguyên `eval_base.json`, `eval_adversarial.json`, `eval_helpdesk_extension.json`; tự viết đúng 10 case trong `eval_group.json` theo cấu trúc 5 + 5.
-- UI chạy được theo README, transcript cho yêu cầu bình thường, thiếu thông tin, nhiều lượt và tạo phiếu.
+- Giữ các bộ IT gốc. Nếu đổi lĩnh vực, nộp bộ riêng 30 câu cơ bản (20 + 10) và 12 câu an toàn, chốt trước v0; ghi đường dẫn/lệnh chạy. Mọi nhóm viết thêm 10 câu mới (5 + 5), theo README.
+- UI chạy được theo README, transcript cho yêu cầu bình thường, thiếu thông tin, nhiều lượt và hành động ghi dữ liệu của lĩnh vực đã chọn.
 - Commit kỹ thuật của từng thành viên và INDIVIDUAL tự viết trong `TEAM.md`.
 
 Có thể commit `runs/`, `transcripts/` và `analysis/` sau khi kiểm tra nội dung. Không commit `.env`, khóa truy cập, dữ liệu thật, `.venv`, cache hay `tickets/`.

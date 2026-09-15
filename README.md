@@ -1,14 +1,24 @@
 # Day04 — Prompt Engineering & Tool Calling
 
-**Làm nhóm · K4 Level 3B · IT Helpdesk Agent.** Mỗi thành viên tự nộp cùng URL repo nhóm trên VLearn. Repo bài nộp dùng tên `K4-L3-DAY04-HoVaTen-MSSV-PromptEngineeringToolCalling`; khai báo thành viên và đóng góp trong [TEAM.md](TEAM.md).
+**Làm nhóm · K4 Level 3B · Trợ lý AI theo lĩnh vực tự chọn.** Mỗi thành viên tự nộp cùng URL repo nhóm trên VLearn. Repo bài nộp dùng tên `K4-L3-DAY04-HoVaTen-MSSV-PromptEngineeringToolCalling`; khai báo thành viên và đóng góp trong [TEAM.md](TEAM.md).
 
 ## Bài lab này làm gì?
 
-Nhóm nhận một trợ lý IT Helpdesk đã có agent loop, tool và dữ liệu công ty **giả lập**. Trợ lý cần hiểu yêu cầu như kiểm tra email/VPN, xem tình trạng một máy, tìm hướng dẫn nội bộ, hoặc tạo ticket sau khi đã được xác nhận.
+Nhóm nhận starter IT Helpdesk có agent loop, tool và dữ liệu công ty **giả lập**, làm mẫu để xây trợ lý cho lĩnh vực tự chọn. Trợ lý cần hiểu yêu cầu như kiểm tra email/VPN, xem tình trạng một máy, tìm hướng dẫn nội bộ, hoặc tạo ticket sau khi đã được xác nhận.
 
 Starter chạy được nhưng hành vi chưa hoàn chỉnh: có thể chọn nhầm tool, điền sai thông tin, không theo kịp hội thoại nhiều lượt hoặc vượt ranh giới an toàn. Nhóm dùng kết quả chạy thật để cải thiện hành vi đó. Đây không phải bài viết lại toàn bộ ứng dụng hay chỉ làm câu trả lời nghe tự nhiên hơn.
 
 Kết quả cần đạt là một agent có thể chọn đúng tool, gửi đúng input, hỏi lại khi thiếu thông tin, tôn trọng sửa/hủy ở lượt sau và không đưa dữ liệu nội bộ ra ngoài.
+
+## Tự chọn lĩnh vực
+
+**IT Helpdesk là format mẫu, không giới hạn đề tài.** Nhóm có thể làm trợ lý bán hàng, du lịch, học tập, thư viện hoặc lĩnh vực khác. Chốt một nhiệm vụ chính, người dùng và luồng công cụ trong báo cáo ngay từ đầu; dùng dữ liệu giả lập. Có thể tái sử dụng agent loop/provider và thay công cụ, dữ liệu theo đề tài.
+
+- Dùng Helpdesk: giữ các bộ kiểm tra IT có sẵn.
+- Đổi lĩnh vực: giữ bộ IT gốc để tham khảo; tạo bộ riêng gồm **30 câu cơ bản (20 một lượt + 10 nhiều lượt)** và **12 câu an toàn**, có đầu ra kỳ vọng. Chốt bộ trước v0 và giữ nguyên qua v1–v3. Ghi đường dẫn và lệnh chạy với `--eval-cases` trong report.
+- Mọi nhóm đều viết thêm **10 câu mới (5 + 5)**, làm UI, lưu hội thoại và báo cáo. Bộ extension IT là tham khảo cho lĩnh vực khác.
+
+**Điểm: 90 phần chung + tối đa 10 mở rộng = 100.** Mở rộng là chức năng mới ngoài luồng cơ bản đã chốt, có kiểm thử và minh chứng; đổi lĩnh vực không tự được bonus. Ví dụ: thư viện thêm gia hạn mượn sách; du lịch thêm tra cứu tình trạng đặt chỗ; bán hàng thêm kiểm tra điều kiện đổi trả.
 
 ## Starter đã có và nhóm cần làm
 
@@ -20,7 +30,7 @@ Kết quả cần đạt là một agent có thể chọn đúng tool, gửi đ�
 | Mẫu `starter_v0/data/eval_group.json` để trống | Tự viết đúng 10 case: 5 một lượt và 5 nhiều lượt |
 | Mẫu report | Lưu run, transcript; làm UI chat hiện tool call/input/kết quả-lỗi/phiên bản; hoàn thiện report và TEAM |
 
-Chỉ sửa prompt hay tool declaration khi lỗi thuộc hành vi agent. Nếu implementation có lỗi thật, nhóm có thể sửa và cần ghi rõ evidence. Tool mới là phần bonus; xem [RUBRIC.md](RUBRIC.md).
+Nhóm được xây hoặc thay công cụ để phục vụ lĩnh vực đã chọn; đây là phần chung. Dùng prompt và mô tả công cụ để cải thiện hành vi qua v0–v3, sửa code khi lỗi nằm trong cách thực thi. Chức năng ngoài luồng cơ bản đã chốt được xét 10 điểm mở rộng; xem [RUBRIC.md](RUBRIC.md).
 
 ## Luồng làm bài
 

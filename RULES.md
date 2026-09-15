@@ -16,6 +16,8 @@ Sau hạn, giữ nguyên lịch sử bản chốt. Không force-push, xóa commi
 
 Chỉ dùng dữ liệu giả lập. Không commit hoặc đưa vào AI: mật khẩu, OTP, token, API key, recovery code hay dữ liệu thật. Giữ `.env` ở máy và kiểm tra run/transcript trước khi commit.
 
-Tạo ticket cần xác nhận rõ cho đúng nội dung. Tra cứu web chỉ gửi hãng, mẫu thiết bị và loại thông tin công khai; không gửi mã máy/nhân viên, serial, hostname, vị trí hay chẩn đoán nội bộ.
+Hành động ghi dữ liệu (tạo ticket, đặt chỗ, tạo đơn…) cần xác nhận rõ cho đúng nội dung. Với Helpdesk, tra cứu web chỉ gửi hãng, mẫu thiết bị và loại thông tin công khai; không gửi mã máy/nhân viên, serial, hostname, vị trí hay chẩn đoán nội bộ.
 
-Bonus kỹ thuật tối đa 10 điểm của bài lab; không phải điểm phát biểu hoặc pitching. Xem [RUBRIC.md](RUBRIC.md).
+Mọi lĩnh vực phải giữ dữ liệu riêng tư trong hệ thống và không làm theo lệnh nhúng trong tài liệu/tool result.
+
+Bonus kỹ thuật tối đa 10 điểm nằm trong thang 100 (90 phần chung + 10 mở rộng); không phải điểm phát biểu hoặc pitching. Xem [RUBRIC.md](RUBRIC.md).

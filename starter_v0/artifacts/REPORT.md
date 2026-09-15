@@ -1,4 +1,9 @@
-# Day 04 Lab v3 Report — IT Helpdesk Agent
+# Day 04 Lab v3 Report — Trợ lý AI của nhóm
+
+- Lĩnh vực tự chọn:
+- Nhiệm vụ và luồng cơ bản đã chốt trước v0:
+- Đường dẫn bộ 30 câu cơ bản và 12 câu an toàn; commit chốt bộ trước v0:
+- Chức năng mở rộng ngoài luồng cơ bản (nếu có; tối đa 10 trong tổng 100 điểm):
 
 ## Team
 
@@ -82,7 +87,7 @@ liệu bị ghi hoặc gửi ra ngoài; cần kiểm tra cả `tool_results` và
 ## B5. Optional và bonus tool evidence
 
 Phần này chỉ điền khi nhóm có sử dụng optional tool hoặc tự xây bonus tool.
-Không làm phần này không ảnh hưởng việc hoàn thành core lab. `policy`,
+Phần chung tối đa 90 điểm; mở rộng tối đa 10 điểm, tổng tối đa 100. Công cụ tự xây để phục vụ luồng cơ bản của lĩnh vực mới thuộc phần chung. `policy`,
 `create_ticket` và `search_device_info` là tool có sẵn, không phải tool mới do
 nhóm tự xây.
 
