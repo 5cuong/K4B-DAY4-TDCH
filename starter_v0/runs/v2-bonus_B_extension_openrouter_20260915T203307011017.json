@@ -1,0 +1,388 @@
+{
+  "run_id": "v2-bonus_B_extension_openrouter_20260915T203307011017",
+  "version": "v2-bonus",
+  "artifact_version": "v2-bonus+p38c1e40187fc+t312ff59bceef",
+  "prompt_hash": "38c1e40187fc784b12ea50dd11bc64bdb5822ab3c40ae6f89cff7ee6859a140d",
+  "tools_hash": "312ff59bceefda82a4f1c9c172ecf5d8cc1bd5404764e1c0a1e5abdb30a186b0",
+  "phase": "B",
+  "suite": "extension",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "F:\\UIT\\AITC\\Lab4\\K4B-DAY4-TDCH\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "F:\\UIT\\AITC\\Lab4\\K4B-DAY4-TDCH\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_bonus.json",
+  "dataset_id": "tdch_warranty_bonus",
+  "dataset_role": "extension",
+  "description": "Team-authored warranty routing cases. Separate from fixed base and group datasets.",
+  "generated_at": "2026-09-15T20:33:07",
+  "summary": {
+    "total_cases": 6,
+    "measured_cases": 6,
+    "provider_error_cases": 0,
+    "passed_cases": 6,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "W01_lookup",
+      "phase": "B",
+      "suite": "extension",
+      "case_suite": "extension",
+      "is_multiturn": false,
+      "metadata": {},
+      "input": "Cho tôi biết hạn và phạm vi bảo hành của LT-204.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {
+              "asset_id": "LT-204"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {
+              "asset_id": "LT-204"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "check_warranty",
+          "args": {
+            "asset_id": "LT-204"
+          },
+          "result": {
+            "tool": "check_warranty",
+            "asset_id": "LT-204",
+            "status": "active",
+            "warranty_until": "2027-02-11",
+            "as_of": "2026-09-14",
+            "days_remaining": 150,
+            "coverage_status": "available",
+            "coverage": [
+              "Lỗi phần cứng do nhà sản xuất",
+              "Linh kiện thay thế theo kết quả kiểm tra"
+            ],
+            "exclusions": [
+              "Rơi vỡ hoặc chất lỏng",
+              "Hao mòn thông thường"
+            ],
+            "support_channel": "Helpdesk nội bộ tiếp nhận yêu cầu bảo hành",
+            "next_step": "Còn hạn theo snapshot. Liên hệ Helpdesk để đối chiếu sự cố với phạm vi và điều kiện bảo hành.",
+            "source": "fictional_local_warranty_data",
+            "notice": "Kết quả tính theo snapshot giả lập; không phải xác nhận chấp thuận bảo hành từ hãng."
+          }
+        }
+      ]
+    },
+    {
+      "id": "W02_missing_id",
+      "phase": "B",
+      "suite": "extension",
+      "case_suite": "extension",
+      "is_multiturn": false,
+      "metadata": {},
+      "input": "Laptop của tôi còn bảo hành không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Vui lòng cung cấp mã tài sản của laptop để kiểm tra bảo hành.",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Vui lòng cung cấp mã tài sản của laptop để kiểm tra bảo hành.",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Vui lòng cung cấp mã tài sản của laptop để kiểm tra bảo hành.",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "W03_unknown_asset",
+      "phase": "B",
+      "suite": "extension",
+      "case_suite": "extension",
+      "is_multiturn": false,
+      "metadata": {},
+      "input": "Tra cứu bảo hành thiết bị LT-999999.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {
+              "asset_id": "LT-999999"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {
+              "asset_id": "LT-999999"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "check_warranty",
+          "args": {
+            "asset_id": "LT-999999"
+          },
+          "result": {
+            "tool": "check_warranty",
+            "asset_id": "LT-999999",
+            "error": "asset_not_found"
+          }
+        }
+      ]
+    },
+    {
+      "id": "W04_correction",
+      "phase": "B",
+      "suite": "extension",
+      "case_suite": "extension",
+      "is_multiturn": true,
+      "metadata": {},
+      "input": [
+        {
+          "role": "user",
+          "content": "Kiểm tra bảo hành LT-204."
+        },
+        {
+          "role": "user",
+          "content": "Tôi nhầm, chỉ tra cứu bảo hành DT-031."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {
+              "asset_id": "DT-031"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {
+              "asset_id": "DT-031"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "check_warranty",
+          "args": {
+            "asset_id": "DT-031"
+          },
+          "result": {
+            "tool": "check_warranty",
+            "asset_id": "DT-031",
+            "status": "active",
+            "warranty_until": "2026-11-19",
+            "as_of": "2026-09-14",
+            "days_remaining": 66,
+            "coverage_status": "available",
+            "coverage": [
+              "Lỗi phần cứng do nhà sản xuất"
+            ],
+            "exclusions": [
+              "Hư hỏng do sử dụng sai",
+              "Phần mềm không thuộc gói bảo hành"
+            ],
+            "support_channel": "Helpdesk nội bộ tiếp nhận yêu cầu bảo hành",
+            "next_step": "Còn hạn theo snapshot. Liên hệ Helpdesk để đối chiếu sự cố với phạm vi và điều kiện bảo hành.",
+            "source": "fictional_local_warranty_data",
+            "notice": "Kết quả tính theo snapshot giả lập; không phải xác nhận chấp thuận bảo hành từ hãng."
+          }
+        }
+      ]
+    },
+    {
+      "id": "W05_cancel",
+      "phase": "B",
+      "suite": "extension",
+      "case_suite": "extension",
+      "is_multiturn": true,
+      "metadata": {},
+      "input": [
+        {
+          "role": "user",
+          "content": "Kiểm tra bảo hành LT-204."
+        },
+        {
+          "role": "user",
+          "content": "Hủy yêu cầu tra cứu, không cần kiểm tra nữa."
+        }
+      ],
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "```json\n{\n  \"intent\": \"cancel_request\",\n  \"action\": \"none\",\n  \"reply\": \"Yêu cầu tra cứu bảo hành cho LT-204 đã bị hủy.\",\n  \"evidence_ids\": []\n}\n```",
+        "case_failure_type": "unnecessary_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "W06_supply_id",
+      "phase": "B",
+      "suite": "extension",
+      "case_suite": "extension",
+      "is_multiturn": true,
+      "metadata": {},
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi muốn xem bảo hành máy của mình."
+        },
+        {
+          "role": "assistant",
+          "content": "Bạn vui lòng cung cấp mã tài sản."
+        },
+        {
+          "role": "user",
+          "content": "Mã máy là LT-204."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {
+              "asset_id": "LT-204"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "check_warranty",
+            "args": {
+              "asset_id": "LT-204"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "check_warranty",
+          "args": {
+            "asset_id": "LT-204"
+          },
+          "result": {
+            "tool": "check_warranty",
+            "asset_id": "LT-204",
+            "status": "active",
+            "warranty_until": "2027-02-11",
+            "as_of": "2026-09-14",
+            "days_remaining": 150,
+            "coverage_status": "available",
+            "coverage": [
+              "Lỗi phần cứng do nhà sản xuất",
+              "Linh kiện thay thế theo kết quả kiểm tra"
+            ],
+            "exclusions": [
+              "Rơi vỡ hoặc chất lỏng",
+              "Hao mòn thông thường"
+            ],
+            "support_channel": "Helpdesk nội bộ tiếp nhận yêu cầu bảo hành",
+            "next_step": "Còn hạn theo snapshot. Liên hệ Helpdesk để đối chiếu sự cố với phạm vi và điều kiện bảo hành.",
+            "source": "fictional_local_warranty_data",
+            "notice": "Kết quả tính theo snapshot giả lập; không phải xác nhận chấp thuận bảo hành từ hãng."
+          }
+        }
+      ]
+    }
+  ]
+}
