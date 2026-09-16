@@ -28,15 +28,13 @@
 
 ## INDIVIDUAL
 
-Sao chép mục này cho từng thành viên.
-
 ### Vũ Quốc Huy — 2A202602929
 
 - Phần việc và file/commit/PR: `starter_v0/ui.py`, UI README section, v2/v3 artifacts, run eval và transcript; commit UI `4c39b81` và commit tích hợp chốt `3aa8b19`.
 - Quyết định, khó khăn và cách xử lý: siết schema tool, thêm snapshot v0/v2 để hash reproducible, bổ sung quy tắc chống stale confirmation/prompt injection và kiểm thử lại bằng OpenRouter.
 - Điều đã học: phân biệt lỗi routing, argument và boundary; kết quả chỉ hợp lệ khi không có provider error và phải kiểm tra tool result/filesystem.
 - AI/công cụ đã dùng và cách kiểm tra: Codex, OpenRouter `openai/gpt-4o-mini`; kiểm tra bằng run base/group/adversarial/extension, smoke tests và UI HTTP requests.
-- Thời điểm đã tự nộp URL repo chung trên VLearn: thành viên tự điền.
+- Thời điểm đã tự nộp URL repo chung trên VLearn: 21:45:00 15/9/2026.
 
 ### Nguyễn Hoàng Cường — 2A202602473
 
@@ -46,7 +44,6 @@ Sao chép mục này cho từng thành viên.
 - AI/công cụ đã dùng và cách kiểm tra: Codex, Python, Git, Gemini để preflight/chẩn đoán quota và OpenRouter `openai/gpt-4o-mini` cho run v0/v1 hợp lệ. Kiểm tra bằng `scripts/preflight_provider.py`, `run_eval.py`, summary 30/30 không có provider error, đối chiếu các case FAIL và `tool_results` trong run JSON, hash của prompt/tool trong version log.
 - Thời điểm đã tự nộp URL repo chung trên VLearn: 20:00:01 15/9/2026
 
-> Thành viên tự viết và commit nội dung INDIVIDUAL của mình theo quy định lab.
 
 ### Tống Trần Tiến Dũng — 2A202602791
 
