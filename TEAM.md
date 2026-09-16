@@ -36,7 +36,7 @@
 - Quyết định, khó khăn và cách xử lý: siết schema tool, thêm snapshot v0/v2 để hash reproducible, bổ sung quy tắc chống stale confirmation/prompt injection và kiểm thử lại bằng OpenRouter.
 - Điều đã học: phân biệt lỗi routing, argument và boundary; kết quả chỉ hợp lệ khi không có provider error và phải kiểm tra tool result/filesystem.
 - AI/công cụ đã dùng và cách kiểm tra: Codex, OpenRouter `openai/gpt-4o-mini`; kiểm tra bằng run base/group/adversarial/extension, smoke tests và UI HTTP requests.
-- Thời điểm đã tự nộp URL repo chung trên VLearn: 21:45:00 15/9/2026.
+- Thời điểm đã tự nộp URL repo chung trên VLearn: [21:45:00 15/9/2026]
 
 ### Nguyễn Hoàng Cường — 2A202602473
 
