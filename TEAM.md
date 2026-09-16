@@ -7,7 +7,7 @@
 - Tên nhóm: TDCH
 - Người đại diện: Nguyễn Hoàng Cường / MSSV:2A202602473
 - Tên repo: `K4B-DAY4-TDCH`
-- URL repo, nhánh nộp, commit chốt: https://github.com/5cuong/K4B-DAY4-TDCH · `main` · `3aa8b19`
+- URL repo, nhánh nộp, commit chốt: https://github.com/5cuong/K4B-DAY4-TDCH · `main` · `7fd34e8`
 - Deadline áp dụng và link thông báo đổi hạn nếu có:
 
 ## Thành viên
