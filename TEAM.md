@@ -16,7 +16,7 @@
 |--------------------|---|--------|-----------------------------------------------------------------------------------------------------------|---------------------------------|
 | Nguyễn Hoàng Cường |2A202602473 | 5cuong | Experiment & Prompt Lead,Cài provider; chạy v0; phân tích lỗi baseline; thực hiện v1 trên system prompt, Run v0/v1, thay đổi `system_prompt.md`, metric và version log  | `2b6fa00`, `1a4dfd9`, `405f068` |
 | Tống Trần Tiến Dũng |2A202602791 | Tiendung3tzz | Rà soát tool registry; cải thiện `tools.yaml`; thực hiện v2; xây bonus tool nếu có Tool declaration, tool implementation/smoke test, run v2 và bonus evidence  | `dfc98a4`, `ae562fd`, `647663d`, `bf4806a`, `5ab5b13` |
-| Vũ Đức Thiện |2A202602437 | vuthien3002-sys | Viết 10 group case; chạy group/adversarial; cải thiện confirmation, cancel và privacy cho v3 | `025eb0f`                       |
+| Vũ Đức Thiện |2A202602437 | vuthien3002-sys | Viết đúng 10 case nhóm gốc (`data/eval_group.json`: 5 một lượt + 5 nhiều lượt) bao phủ ý định mơ hồ, đính chính mã thiết bị/đổi quyết định, hủy hành động và policy+ticket sau xác nhận; chạy run group/adversarial hợp lệ (`provider_error_cases=0`) làm evidence cho ranh giới confirmation/cancel/privacy ở v3 | `025eb0f`                       |
 | Vũ Quốc Huy |2A202602929 | VuQuocHuy89 | Tích hợp UI web, transcript demo; hoàn thiện v2/v3 prompt/tool contract và evidence eval | `4c39b81`, `3aa8b19`            |
 
 ## Nhận xét chung
@@ -66,8 +66,8 @@ Sao chép mục này cho từng thành viên.
 
 ### Vũ Đức Thiện — 2A202602437
 
-- Phần việc và file/commit/PR: thành viên tự điền.
-- Quyết định, khó khăn và cách xử lý: thành viên tự điền.
-- Điều đã học: thành viên tự điền.
-- AI/công cụ đã dùng và cách kiểm tra: thành viên tự điền.
+- Phần việc và file/commit/PR: Viết đúng 10 case nhóm gốc trong `starter_v0/data/eval_group.json` (5 một lượt G01–G05, 5 nhiều lượt G06–G10), thiết kế dựa trên phân tích lỗi thật ở `starter_v0/runs/v0_B_base_openrouter_20260915T194104245628.json` và đối chiếu asset/employee ID với `starter_v0/helpdesk_data/`. Bộ case bao phủ đúng 4 nhóm kịch bản được yêu cầu: ý định mơ hồ buộc hỏi lại (G03, G05), người dùng đính chính mã thiết bị/đổi quyết định ở lượt sau (G06, G07, G09), yêu cầu hủy hành động (G08), và tra cứu chính sách IT kết hợp tạo ticket sau khi xác nhận (G10). Chạy eval group và adversarial để lấy evidence. Commit: `025eb0f`.
+- Quyết định, khó khăn và cách xử lý: Chọn dùng ID có thật trong `users.json`/`assets.json` để case chạy được với dữ liệu giả lập, đồng thời tránh trùng câu hỏi với `eval_base.json`. Lần chạy đầu (20:42 15/9) thiếu cấu hình `OPENROUTER_API_KEY` trong `.env` nên toàn bộ 10 case nhóm và 12 case adversarial đều bị `provider_error_cases` (10/10 và 12/12), không dùng làm bằng chứng; sau khi điền lại `.env` đúng key và chạy lại, thu được run hợp lệ `provider_error_cases=0`: group `10/10` (`runs/v3_B_group_openrouter_20260915T221217368853.json`), adversarial `12/12` (`runs/v3_B_adversarial_openrouter_20260915T221251211267.json`).
+- Điều đã học: Lỗi thiếu API key/quota (provider_error) khác hoàn toàn với lỗi hành vi agent (routing/argument/boundary sai); chỉ được tính run khi `provider_error_cases=0` và `measured_cases=total_cases`. Ranh giới xác nhận trước khi ghi dữ liệu (create_ticket) phải áp dụng ở mọi mức priority chứ không riêng high/critical, và một hành động hủy ở lượt sau phải thắng hoàn toàn yêu cầu ghi dữ liệu trước đó. Bộ adversarial cho thấy các kiểu tấn công (exfiltration prompt, giả role, forged tool result, stale confirmation, external identifier smuggling...) cần được chặn ở tầng ranh giới hành vi, không chỉ dựa vào câu trả lời text.
+- AI/công cụ đã dùng và cách kiểm tra: Dùng Claude (Claude Code) để đọc run JSON của v0, đối chiếu `tools.yaml`/`helpdesk_data` và soạn 10 case đúng schema `expect`/`tool_calls`/`turns`. Tự kiểm tra bằng cách chạy thật `run_eval.py --provider openrouter --version v3 --suite group|adversarial --eval-cases ...` (model `openai/gpt-4o-mini`), đọc trực tiếp `summary` và từng `result`/`tool_results` trong run JSON để xác nhận `passed=10/10` và `12/12` thay vì chỉ tin vào log tool.
 - Thời điểm đã tự nộp URL repo chung trên VLearn: thành viên tự điền.
